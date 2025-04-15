@@ -54,4 +54,25 @@ const sendMessage = asyncHandler(async (req, res) => {
   }
 });
 
+const fetchGeminiResponse = asyncHandler(async () => {
+  const API_KEY = "AIzaSyAIjjmm6o6nV8eB_Yn816rK1tLxqJIMwYc"; // will be exposed!
+  const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAIjjmm6o6nV8eB_Yn816rK1tLxqJIMwYc";
+
+  const body = {
+    contents: [{ parts: [{ text: "Tell me a joke" }] }]
+  };
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
+
+  const data = await response.json();
+  console.log(data);
+});
+
+
 module.exports = { allMessages, sendMessage };

@@ -193,6 +193,28 @@ const addToGroup = asyncHandler(async (req, res) => {
   }
 });
 
+
+// for getting user names of a chatid
+// GET  --- /api/chat/getusers
+
+const getUserNamesInChat = asyncHandler(async (req, res) => {
+  const { chatId } = req.body; // or use req.params.chatId if passed via URL
+
+  const chat = await Chat.findById(chatId)
+    .populate("users", "name") // only fetch the 'name' field
+    .select("users"); // ensure only 'users' field is returned
+
+  if (!chat) {
+    res.status(404);
+    throw new Error("Chat not found");
+  }
+
+  const userNames = chat.users.map(user => user.name);
+  res.json({ userNames });
+});
+
+
+
 module.exports = {
   accessChat,
   fetchChats,
@@ -200,4 +222,5 @@ module.exports = {
   renameGroup,
   addToGroup,
   removeFromGroup,
+  getUserNamesInChat,
 };
