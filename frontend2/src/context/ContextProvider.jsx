@@ -5,9 +5,10 @@ const userContext = createContext(null);
 const ContextProvider = ({ children }) => {
     const [user, setUser] = useState({});
     const [userChats, setUserChats] = useState([]);
+    const [selectedChat, setSelectedChat] = useState({});
     return (
         <userContext.Provider value={
-            { user, setUser, userChats, setUserChats }
+            { user, setUser, userChats, setUserChats, selectedChat, setSelectedChat }
         }>
             {children}
         </userContext.Provider>

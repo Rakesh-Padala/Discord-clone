@@ -5,7 +5,7 @@ import axios from 'axios';
 import { getOtherUser, getTrimmedChat } from '../utils/chatlistutils';
 
 const ChatsList = () => {
-  const { user, userChats, setUserChats } = ChatState();
+  const { user, userChats, setUserChats, setSelectedChat } = ChatState();
   const api = axios.create({
     baseURL: "http://localhost:5000/",
     headers: {
@@ -34,6 +34,10 @@ const ChatsList = () => {
     //   second
     // }
   }, [])
+  function handleSelectState(chatdoc) {
+    setSelectedChat(chatdoc);
+  }
+
 
 
   return (
@@ -53,6 +57,7 @@ const ChatsList = () => {
           {userChats.map((curchat, index) => (
             <div
               key={curchat._id}
+              onClick={() => handleSelectState(curchat)}
               className="flex justify-start items-center gap-6 w-full h-20 bg-blue-300 mt-3 hover:bg-blue-200 cursor-pointer rounded-2xl px-4"
             >
               <CircleUserRound className="w-8 h-10" />

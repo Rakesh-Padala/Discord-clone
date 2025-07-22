@@ -1,17 +1,17 @@
 import React from 'react'
 import Navbar from './Navbar'
 import ChatsList from './ChatsList'
-import ChartArea from './ChatArea'
+import ChatArea from './ChatArea'
 
 const Homepage = () => {
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <div className='flex'>
-        <ChatsList/>
-        <ChartArea/>
+        <ChatsList />
+        <ChatArea />
       </div>
-      
+
     </div>
   )
 }
